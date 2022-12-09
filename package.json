@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "typescript": "4.9.3",
+    "@types/jest": "29.2.4"
+  }
+}

@@ -1,0 +1,56 @@
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config", "ts_project")
+load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
+
+ts_config(
+    name = "base_tsconfig",
+    src = "tsconfig.json",
+)
+
+SRCS = glob(
+    ["src/**/*.ts"],
+    exclude = ["src/**/*.spec.ts"],
+)
+
+NODE_MODULES = []
+
+ts_config(
+    name = "build_tsconfig",
+    src = "tsconfig.build.json",
+    deps = [":base_tsconfig"],
+)
+
+ts_project(
+    name = "build",
+    srcs = SRCS,
+    declaration = True,
+    source_map = True,
+    tsconfig = ":build_tsconfig",
+    deps = NODE_MODULES,
+)
+
+TEST_SRCS = glob(["src/**/*.spec.ts"])
+
+TEST_NODE_MODULES = [
+    "//:node_modules/@types/jest",
+]
+
+ts_config(
+    name = "test_tsconfig",
+    src = "tsconfig.test.json",
+    deps = [":base_tsconfig"],
+)
+
+ts_project(
+    name = "test_build",
+    srcs = TEST_SRCS,
+    source_map = True,
+    tsconfig = ":test_tsconfig",
+    deps = TEST_NODE_MODULES + NODE_MODULES + [":build"],
+)
+
+jest_test(
+    name = "test",
+    config = "jest.config.js",
+    data = [":test_build"],
+    snapshots = True,
+)
