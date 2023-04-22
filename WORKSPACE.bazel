@@ -4,9 +4,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "aspect_rules_js",
-    sha256 = "ad666b12324bab8bc151772bb2eff9aadace7bfd4d624157c2ac3931860d1c95",
-    strip_prefix = "rules_js-1.11.1",
-    url = "https://github.com/aspect-build/rules_js/archive/refs/tags/v1.11.1.tar.gz",
+    sha256 = "2503a997149b6633751467e083ff5ef114082c275cc53512e60c6f8a10fc08b8",
+    strip_prefix = "rules_js-1.25.1",
+    url = "https://github.com/aspect-build/rules_js/releases/download/v1.25.1/rules_js-v1.25.1.tar.gz",
 )
 
 load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
@@ -15,9 +15,9 @@ rules_js_dependencies()
 
 http_archive(
     name = "aspect_rules_ts",
-    sha256 = "e81f37c4fe014fc83229e619360d51bfd6cb8ac405a7e8018b4a362efa79d000",
-    strip_prefix = "rules_ts-1.0.4",
-    url = "https://github.com/aspect-build/rules_ts/archive/refs/tags/v1.0.4.tar.gz",
+    sha256 = "8eb25d1fdafc0836f5778d33fb8eaac37c64176481d67872b54b0a05de5be5c0",
+    strip_prefix = "rules_ts-1.3.3",
+    url = "https://github.com/aspect-build/rules_ts/releases/download/v1.3.3/rules_ts-v1.3.3.tar.gz",
 )
 
 load("@aspect_rules_ts//ts:repositories.bzl", "rules_ts_dependencies")
@@ -28,25 +28,14 @@ rules_ts_dependencies(ts_version_from = "//:package.json")
 
 http_archive(
     name = "aspect_rules_jest",
-    sha256 = "f2be891d9b38473f08a336e5f6ca327bfdc90411b1798a1c476c6f6ceae54520",
-    strip_prefix = "rules_jest-0.13.1",
-    url = "https://github.com/aspect-build/rules_jest/archive/refs/tags/v0.13.1.tar.gz",
+    sha256 = "48a16d31be995b2fdd868f5e18aee3d1980061576be75bad98bbbe1de2dde9d3",
+    strip_prefix = "rules_jest-0.18.2",
+    url = "https://github.com/aspect-build/rules_jest/releases/download/v0.18.2/rules_jest-v0.18.2.tar.gz",
 )
 
 load("@aspect_rules_jest//jest:dependencies.bzl", "rules_jest_dependencies")
 
 rules_jest_dependencies()
-
-load("@aspect_rules_jest//jest:repositories.bzl", "jest_repositories")
-
-jest_repositories(
-    name = "jest",
-    jest_version = "v29.3.1",
-)
-
-load("@jest//:npm_repositories.bzl", jest_npm_repositories = "npm_repositories")
-
-jest_npm_repositories()
 
 # Rules NodeJS
 

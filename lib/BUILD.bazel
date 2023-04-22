@@ -53,4 +53,5 @@ jest_test(
     config = "jest.config.js",
     data = [":test_build"],
     snapshots = True,
+    node_modules = "//:node_modules"
 )
